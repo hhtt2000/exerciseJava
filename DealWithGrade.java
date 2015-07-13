@@ -18,7 +18,7 @@ public class DealWithGrade {
 		try{
 			scanner = new Scanner(new File(args[0]));			
 		} catch(Exception e){
-			System.out.println(args[0] + "À»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println(args[0] + "ì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			System.exit(0);
 		}
 		
@@ -35,8 +35,6 @@ public class DealWithGrade {
 			list.add(new Student(name, classNo, studentNo, Korean, Math, English));
 			
 		}
-		 //                        ÀÌ¸§, ¹İ, ¹øÈ£, ±¹¾î, ¼öÇĞ, ¿µ¾î 
-//        list.add(new Student("³²±Ã¼º", 3,2,100,100,100)); 
 
         calculateSchoolRank(list);
         calculateClassRank(list);
@@ -90,15 +88,15 @@ public class DealWithGrade {
 	}
 	
 	public static void printList(List<Student> list){
-		String header = Student.format("ÀÌ¸§", 5, Student.LEFT)
-							+Student.format("¹İ", 4, Student.RIGHT)
-							+Student.format("¹øÈ£", 3, Student.RIGHT)
-							+Student.format("±¹¾î", 4, Student.RIGHT)
-							+Student.format("¼öÇĞ", 4, Student.RIGHT)
-							+Student.format("¿µ¾î", 4, Student.RIGHT)
-							+Student.format("ÃÑÁ¡", 5, Student.RIGHT)
-							+Student.format("Àü±³µî¼ö", 5, Student.RIGHT)
-							+Student.format("¹İµî¼ö", 5, Student.RIGHT);
+		String header = Student.format("ì´ë¦„", 5, Student.LEFT)
+							+Student.format("ë°˜", 4, Student.RIGHT)
+							+Student.format("ë²ˆí˜¸", 3, Student.RIGHT)
+							+Student.format("êµ­ì–´", 4, Student.RIGHT)
+							+Student.format("ìˆ˜í•™", 4, Student.RIGHT)
+							+Student.format("ì˜ì–´", 4, Student.RIGHT)
+							+Student.format("ì´ì ", 5, Student.RIGHT)
+							+Student.format("ì „êµë“±ìˆ˜", 5, Student.RIGHT)
+							+Student.format("ë°˜ë“±ìˆ˜", 5, Student.RIGHT);
 		System.out.println(header); 
 		System.out.println("===========================================================");
 		for(Student s : list){
