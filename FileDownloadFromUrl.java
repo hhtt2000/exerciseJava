@@ -36,7 +36,7 @@ public class FileDownloadFromUrl {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String url = "http://www.topcoat.co.jp/sasaki-nozomi/S15441970.jpg";
+		String url = "이미지가 위치한 url";
 		FileDownloadFromUrl.download(url);
 	}
 
