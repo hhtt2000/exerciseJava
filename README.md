@@ -2,4 +2,5 @@
 ### 자바로 구현했던 내용
 * ConsoleEx1
   * Windows CLI 부분 구현
-*
+* DealWithGrade
+  * 조건에 따른 정렬 구현
