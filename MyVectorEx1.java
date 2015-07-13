@@ -4,16 +4,12 @@ import java.util.Iterator;
 
 class MyVector {
 	
-	protected Object[] data = null;//°´Ã¼¸¦ ´ã±â À§ÇÑ °´Ã¼¹è¿­ ¼±¾ğ
-	protected int capacity = 0;//¿ë·®(°´Ã¼¹è¿­ÀÇ Å©±â)
-	protected int size = 0;//°´Ã¼¹è¿­¿¡ ÀúÀåµÈ °´Ã¼ÀÇ °³¼ö
+	protected Object[] data = null;//ê°ì²´ë¥¼ ë‹´ê¸° ìœ„í•œ ê°ì²´ë°°ì—´ ì„ ì–¸
+	protected int capacity = 0;//ìš©ëŸ‰(ê°ì²´ë°°ì—´ì˜ í¬ê¸°)
+	protected int size = 0;//ê°ì²´ë°°ì—´ì— ì €ì¥ëœ ê°ì²´ì˜ ê°œìˆ˜
 	
 	public MyVector(int capacity){
-		 /*
-	        1. Áö¿ªº¯¼ö capacityÀÇ °ªÀÌ 0º¸´Ù ÀÛÀ¸¸é, IllegalArgumentExceptonÀ» ¹ß»ı½ÃÅ²´Ù.
-	        2. Áö¿ªº¯¼ö capacityÀÇ °ªÀ» ÀÎ½ºÅÏ½ºº¯¼ö capacity¿¡ ÀúÀåÇÑ´Ù.
-	        3. Áö¿ªº¯¼ö capacity¿Í °°Àº Å©±âÀÇ Object¹è¿­À» »ı¼ºÇØ¼­ °´Ã¼¹è¿­ data¿¡ ÀúÀåÇÑ´Ù.
-	    */
+	
 		if(capacity < 0){
 			throw new IllegalArgumentException();
 		}
@@ -23,11 +19,6 @@ class MyVector {
 	}
 	
 	public MyVector(){
-	/*
-        1. ¸Å°³º¯¼ö°¡ ¾ø´Â »ı¼ºÀÚ¸¦ ÅëÇØ MyVector¸¦ »ı¼ºÇÑ´Ù¸é,
-           	¿ë·®(capacity)°¡ 10ÀÌ µÇµµ·Ï ÇÑ´Ù.
-           	¸Å°³º¯¼ö°¡ ÀÖ´Â »ı¼ºÀÚ MyVector(int capacity)¸¦ »ç¿ëÇÏ¼¼¿ä.
-    */
 		this(10);
 	}
 	
@@ -44,13 +35,7 @@ class MyVector {
 	}
 	
 	public void ensureCapacity(int minCapacity){
-	/*
-        1. minCapacity°¡ capacityº¸´Ù Å©¸é newCapacityÀÇ °ªÀ» µÎ¹è·Î ÇÑ´Ù.
-           (»ç½Ç ¹İµå½Ã 2¹èÀÌ¾î¾ß ÇÒ ÇÊ¿ä´Â ¾ø´Ù. ÀûÀıÇÑ ºñÀ²·Î Å©±â¸¦ ´Ã·ÁÁÖ±â À§ÇÑ °ÍÀÓ)
-        2. ±×·¡µµ minCapacity°¡ newCapacityº¸´Ù Å©¸é,
-            minCapacityÀÇ °ªÀ» newCapacity¿¡ ÀúÀåÇÑ´Ù.
-        3. setCapacity()¸¦ È£ÃâÇØ¼­ °´Ã¼¹è¿­ÀÇ Å©±â°¡ newCapacity°¡ µÇµµ·Ï ÇÑ´Ù.
-    */
+
 		int newCapacity = capacity;
 		
 		if(minCapacity > capacity){
@@ -63,13 +48,7 @@ class MyVector {
 	}
 	
 	public void setCapacity(int newCapacity){
-	/*
-        1. newCapacity Å©±âÀÇ °´Ã¼¹è¿­À» »õ·Î ¸¸µç´Ù.
-        2. ±âÁ¸ÀÇ °´Ã¼¹è¿­(data)ÀÇ ³»¿ëÀ» »õ·Î¿î °´Ã¼¹è¿­¿¡ º¹»çÇÑ´Ù.
-           (System.arraycopy()»ç¿ë)
-        3. data°¡ »õ·Î »ı¼ºµÈ °´Ã¼¹è¿­À» ÂüÁ¶ÇÏµµ·Ï ÇÑ´Ù.
-        4. capacityÀÇ °ªÀ» newCapacity·Î º¯°æÇÑ´Ù.
-     */
+
 		if(this.capacity == newCapacity)return;
 		
 		Object[] tempData = new Object[newCapacity];
@@ -79,7 +58,7 @@ class MyVector {
 	}
 	
 	public boolean add(Object obj){
-		//»õ·Î¿î °´Ã¼¸¦ ÀúÀåÇÏ±â Àü¿¡ ÀúÀåÇÒ °ø°£À» È®º¸ÇÑ ÈÄ¿¡ °´Ã¼¸¦ Ãß°¡ÇØ¾ßÇÑ´Ù.
+		//ìƒˆë¡œìš´ ê°ì²´ë¥¼ ì €ì¥í•˜ê¸° ì „ì— ì €ì¥í•  ê³µê°„ì„ í™•ë³´í•œ í›„ì— ê°ì²´ë¥¼ ì¶”ê°€í•´ì•¼í•œë‹¤.
 		int nextSize = size + 1;
 		ensureCapacity(nextSize);
 		data[size++] = obj;
@@ -96,12 +75,7 @@ class MyVector {
 	}
 	
 	public Object set(int index, Object obj){
-/*
-       1. index°¡ sizeº¸´Ù Å©¸é ArrayIndexOutOfBoundsExceptionÀ» ¹ß»ı½ÃÅ²´Ù.
-       2. °´Ã¼¹è¿­ dataÀÇ index¹øÂ° °ªÀ» ÀÓ½Ã·Î ÀúÀåÇÑ´Ù.
-       3. »õ·Î¿î °´Ã¼(obj)¸¦ °´Ã¼¹è¿­ dataÀÇ index¹øÂ° °ª¿¡ ÀúÀåÇÑ´Ù.
-       4. ÀÓ½Ã·Î ÀúÀåÇß´ø ±âÁ¸ °´Ã¼¸¦ ¹İÈ¯ÇÑ´Ù.
-  */
+
 		if(index > size){
 			throw new ArrayIndexOutOfBoundsException();
 		}
@@ -112,15 +86,7 @@ class MyVector {
 	}
 	
 	public int indexOf(Object obj, int index){
- /*
-        1. ³Ñ°Ü¹ŞÀº °´Ã¼(obj)°¡ nullÀÌ¸é,
-           1.1 ¹İº¹¹®À» ÀÌ¿ëÇØ¼­ °´Ã¼¹è¿­(data)¿¡¼­ nullÀÎ °ÍÀ» Ã£¾Æ¼­ ±× À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù.
-                (°Ë»ö¼ø¼­´Â indexºÎÅÍ ½ÃÀÛÇØ¼­ Áõ°¡ÇÏ´Â ¹æÇâ)
-        2. ³Ñ°Ü¹ŞÀº °´Ã¼(obj)°¡ nullÀÌ ¾Æ´Ñ °æ¿ì¿¡´Â
-           2.1 equals¸¦ ÀÌ¿ëÇØ¼­ °°Àº °´Ã¼°¡ ÀÖ´ÂÁö Ã£¾Æ¼­ ±× À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù.                
-                (°Ë»ö¼ø¼­´Â indexºÎÅÍ ½ÃÀÛÇØ¼­ Áõ°¡ÇÏ´Â ¹æÇâ)
-        3. ¸øÃ£À¸¸é -1À» ¹İÈ¯ÇÑ´Ù.
-   */
+
 		if(obj == null){
 			for(int i=index; i<size; i++){
 				if(data[i] == null){
@@ -139,16 +105,7 @@ class MyVector {
 	}
 	
 	public int lastIndexOf(Object obj, int index){
-	/*
-         1. indexÀÇ °ªÀÌ sizeº¸´Ù °°°Å³ª Å©¸é, IndexOutOfBoundsExceptionÀ» ¹ß»ı½ÃÅ²´Ù.
-         2. ³Ñ°Ü¹ŞÀº °´Ã¼(obj)°¡ nullÀÌ¸é,
-            2.1 ¹İº¹¹®À» ÀÌ¿ëÇØ¼­ °´Ã¼¹è¿­(data)¿¡¼­ nullÀÎ °ÍÀ» Ã£¾Æ¼­ ±× À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù.
-                 (°Ë»ö¼ø¼­´Â indexºÎÅÍ ½ÃÀÛÇØ¼­, index°ªÀ» °¨¼Ò½ÃÄÑ¼­ °´Ã¼¹è¿­ÀÇ 0¹øÂ°±îÁö )
-         3. ³Ñ°Ü¹ŞÀº °´Ã¼(obj)°¡ nullÀÌ ¾Æ´Ñ °æ¿ì¿¡´Â
-            3.1 equals¸¦ ÀÌ¿ëÇØ¼­ °°Àº °´Ã¼°¡ ÀÖ´ÂÁö Ã£¾Æ¼­ ±× À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù.                
-                 (°Ë»ö¼ø¼­´Â indexºÎÅÍ ½ÃÀÛÇØ¼­, index°ªÀ» °¨¼Ò½ÃÄÑ¼­ °´Ã¼¹è¿­ÀÇ 0¹øÂ°±îÁö )
-         4. ¸øÃ£À¸¸é -1À» ¹İÈ¯ÇÑ´Ù.
-    */
+
 		if(index >= size){
 			throw new IndexOutOfBoundsException();
 		}
@@ -169,7 +126,7 @@ class MyVector {
 	}
 	
 	public boolean contains(Object obj){
-		//indexof(obj, index)»ç¿ë
+		//indexof(obj, index)ì‚¬ìš©
 		if(indexOf(obj, 0) == -1){
 			return false;
 		} else{
@@ -178,26 +135,19 @@ class MyVector {
 	}
 	
 	public int indexOf(Object obj){
-		//indexof(obj, index)»ç¿ë
-		//Ã£±â ½ÃÀÛÇÒ À§Ä¡¸¦ ÁöÁ¤ÇÏÁö ¤·³ºÀ¸¸é Ã³À½ºÎÅÍ Ã£´Â´Ù.
+		//indexof(obj, index)ì‚¬ìš©
+		//ì°¾ê¸° ì‹œì‘í•  ìœ„ì¹˜ë¥¼ ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´ ì²˜ìŒë¶€í„° ì°¾ëŠ”ë‹¤.
 		return indexOf(obj, 0);
 	}
 	
 	public int lastIndexOf(Object obj){
-		//lastindexof(obj, index)»ç¿ë
-		//Ã£±â ½ÃÀÛÇÒ À§Ä¡¸¦ ÁöÁ¤ÇÏÁö ¤·³ºÀ¸¸é ³¡ºÎÅÍ Ã£´Â´Ù.
+		//lastindexof(obj, index)ì‚¬ìš©
+		//ì°¾ê¸° ì‹œì‘í•  ìœ„ì¹˜ë¥¼ ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´ ëë¶€í„° ì°¾ëŠ”ë‹¤.
 		return lastIndexOf(obj, size-1);
 	}
 	
 	public void add(int index, Object obj){
-	/*
-         1. indexÀÇ °ªÀÌ sizeº¸´ÙÅ©¸é, ArrayIndexOutOfBoundsException
-         2. ensureCapacity()¸¦ È£ÃâÇØ¼­ »õ·Î¿î °´Ã¼°¡ ÀúÀåµÉ °ø°£À» È®º¸ÇÑ´Ù.
-         3. °´Ã¼¹è¿­¿¡¼­ indexÀ§Ä¡ÀÇ °´Ã¼¿Í ÀÌÈÄÀÇ °´Ã¼µéÀ» ÇÑÄ­¾¿ ¿·À¸·Î ÀÌµ¿ÇÑ´Ù.
-            (System.arraycopy()»ç¿ë)
-         4. °´Ã¼¹è¿­ÀÇ indexÀ§Ä¡¿¡ »õ·Î¿î °´Ã¼(obj)¸¦ ÀúÀåÇÑ´Ù.
-         5. sizeÀÇ °ªÀ» 1 Áõ°¡½ÃÅ²´Ù.
-    */
+
 		if(index > size){
 			throw new ArrayIndexOutOfBoundsException();
 		}
@@ -210,14 +160,7 @@ class MyVector {
 	
 	public Object remove(int index){
 		Object oldObj = null;
-	/*
-        1. index°¡ ¹è¿­ÀÇ ¹üÀ§¸¦ ¹ş¾î³ª´ÂÁö Ã¼Å©ÇÏ°í, ¹ş¾î³ª¸é IndexOutOfBoundsException¸¦ ¹ß»ı½ÃÅ²´Ù.
-        2. »èÁ¦ÇÏ°íÀÚÇÏ´Â µ¥ÀÌÅÍ¸¦ oldObj¿¡ ÀúÀåÇÑ´Ù.
-        3. »èÁ¦ÇÏ°íÀÚ ÇÏ´Â °´Ã¼°¡ ¸¶Áö¸· °´Ã¼°¡ ¾Æ´Ï¶ó¸é, ¹è¿­º¹»ç¸¦ ÅëÇØ ºóÀÚ¸®¸¦ Ã¤¿öÁØ´Ù.
-        4. ¸¶Áö¸· µ¥ÀÌÅÍ¸¦ null·Î ÇÑ´Ù. ¹è¿­Àº 0 ºÎÅÍ ½ÃÀÛÇÏ¹Ç·Î ¸¶Áö¸· ¿ä¼Ò´Â index°¡ size-1ÀÌ´Ù. 
-        5. sizeÀÇ °ªÀ» 1 °¨¼Ò½ÃÅ²´Ù.
-        6. oldObj¸¦ ¹İÈ¯ÇÑ´Ù.
-   */
+
 		if(index >= size){
 			throw new IndexOutOfBoundsException();
 		}
@@ -233,11 +176,7 @@ class MyVector {
 	}
 	
 	public boolean remove(Object obj){
-	/*
-        1. ¹İº¹¹®À» ÀÌ¿ëÇØ¼­ °´Ã¼¹è¿­ÀÇ ¸ğµç ¿ä¼Ò¿Í obj°¡ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎÇÑ´Ù.
-            1.1 ÀÏÄ¡ÇÏ¸é remove(int index)¸¦ È£ÃâÇØ¼­ »èÁ¦ÇÏ°í true¸¦ ¹İÈ¯ÇÑ´Ù.
-            1.2 ÀÏÄ¡ÇÏ´Â °ÍÀ» Ã£Áö ¸øÇÏ¸é, false¸¦ ¹İÈ¯ÇÑ´Ù.
-     */
+
 		boolean check = false;
 		for(int i=0; i<size; i++){
 			if(obj.equals(data[i])){
@@ -257,11 +196,6 @@ class MyVector {
 	}
 	
 	public Object[] toArray(){
-	/*
-        1. °´Ã¼¹è¿­ data¿Í °°Àº Å©±âÀÇ °´Ã¼¹è¿­À» »ı¼ºÇÑ´Ù.
-        2. ¹è¿­ÀÇ ³»¿ëÀ» º¹»çÇÑ´Ù. (System.arraycopy()»ç¿ë)
-        3. »ı¼ºÇÑ °´Ã¼¹è¿­À» ¹İÈ¯ÇÑ´Ù.
-    */
 		Object[] tempArr = new Object[size];
 		System.arraycopy(data, 0, tempArr, 0, size);
 		
@@ -269,12 +203,6 @@ class MyVector {
 	}
 	
 	public String toString(){
-	/*
-        1. StringBuffer¸¦ »ı¼ºÇÑ´Ù.
-        2. ¹İº¹¹®°ú get(int i)¸¦ »ç¿ëÇØ¼­ ¹è¿­ÀÇ ¸ğµç ¿ä¼Ò¿¡ Á¢±ÙÇØ¼­ toString()À» È£ÃâÇØ¼­
-           sb¿¡ ÀúÀåÇÑ´Ù.
-        3. sb¸¦ StringÀ¸·Î º¯È¯ÇØ¼­ ¹İÈ¯ÇÑ´Ù.
-   */
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		for(int i=0; i<size; i++){
@@ -293,16 +221,10 @@ class MyVector {
 	}
 	
 	private class Itr implements Iterator {
-		int cursor = 0;//ÀĞ¾î¿Ã ¿ä¼ÒÀÇ À§Ä¡(index)
-		int lastRet = -1;//Á÷Àü¿¡ ÀĞ¾î¿Â °´Ã¼ÀÇ À§Ä¡(index)
+		int cursor = 0;//ì½ì–´ì˜¬ ìš”ì†Œì˜ ìœ„ì¹˜(index)
+		int lastRet = -1;//ì§ì „ì— ì½ì–´ì˜¨ ê°ì²´ì˜ ìœ„ì¹˜(index)
 		
 		public Object next(){
-		/*
-            1. cursor°¡ °¡¸®Å°°í ÀÖ´Â À§Ä¡(index)ÀÇ °´Ã¼¸¦ ²¨³»¿Â´Ù.(get()»ç¿ë)
-            2. cursorÀÇ °ªÀ» lastRet¿¡ ÀúÀåÇÏ°í cursorÀÇ °ªÀ» 1 Áõ°¡½ÃÅ²´Ù.
-               (¿¹¸¦ µé¾î cursorÀÇ °ªÀÌ 1 ÀÌ¾úÀ¸¸é lastRetÀÇ °ªÀº 1ÀÌ µÇ°í, cursorÀÇ °ªÀº 2°¡ µÈ´Ù.)
-            3. 1¿¡¼­ ²¨³»¿Â °´Ã¼¸¦ ¹İÈ¯ÇÑ´Ù.
-         */
 			Object obj = get(cursor);
 			lastRet = cursor;
 			cursor++;
@@ -311,9 +233,7 @@ class MyVector {
 		}
 		
 		public boolean hasNext(){
-		 /*
-             hint : cursorÀÇ °ªÀÌ °´Ã¼¹è¿­ÀÇ ¸¶Áö¸·¿ä¼ÒÀÇ À§Ä¡(index)¿¡ ´Ù´Ù¶ú´ÂÁö È®ÀÎÇÑ´Ù.
-        */ 
+
 			if(cursor < size){
 				return true;
 			} else{
@@ -323,24 +243,7 @@ class MyVector {
 		}
 		
 		public void remove(){
-		/*
-            1. lastRetÀÇ °ªÀÌ -1ÀÌ¸é(Á÷Àü¿¡ ÀĞ¾î¿Â °´Ã¼°¡ ¾ø°Å³ª »èÁ¦ µÇ¾úÀ¸¸é)
-               IllegalStateExceptionÀ» ¹ß»ı½ÃÅ²´Ù.
-            2. Á÷Àü¿¡ ÀĞ¾î¿Â °´Ã¼¸¦ °´Ã¼¹è¿­¿¡¼­ Á¦°ÅÇÑ´Ù.(MyVectorÀÇ remove()»ç¿ë)
-            3. lastRetÀÇ °ªÀÌ cursorÀÇ °ªº¸´Ù ÀÛÀ¸¸é cursorÀÇ °ªÀ» 1°¨¼Ò ½ÃÅ²´Ù.
-                (ÇöÀç cursorÀÇ À§Ä¡º¸´Ù ÀÌÀüÀÇ °ªÀÌ »èÁ¦µÇ¸é cursorÀÇ À§Ä¡µµ º¯°æµÇ¾î¾ß ÇÏ¹Ç·Î)
-            4. lastRet¿¡ -1À» ÀúÀåÇÑ´Ù.(Á÷Àü¿¡ ÀĞ¾î¿Â °´Ã¼°¡ »èÁ¦µÇ¾úÀ¸¹Ç·Î)
 
-            ¿¹¸¦ µé¾î next()¸¦ È£ÃâÇØ¼­ °´Ã¼¹è¿­ÀÇ index°¡ 3ÀÎ ¿ä¼Ò¸¦ ÀĞ¾î¿À¸é..
-             cursor(´ÙÀ½¿¡ ÀĞ¾î¿Ã °´Ã¼ÀÇ À§Ä¡)ÀÇ °ªÀº 4°¡ µÇ°í, lastRetÀÇ °ªÀº 3ÀÌ µÈ´Ù.
-
-             ÀÌ¶§ remove()°¡ È£ÃâµÇ¸é, ÀĞ¾î¿Â °´Ã¼ÀÎ index°¡ 3ÀÎ ¿ä¼Ò´Â »èÁ¦ µÇ°í
-             index°¡ 4ÀÎ À§Ä¡¿¡ ÀÖ´ø °´Ã¼´Â index°¡ 3ÀÎ À§Ä¡·Î ÀÌµ¿ÇÏ°Ô µÈ´Ù.
-             (ºó ÀÚ¸®¸¦ ¸Ş²Ù±â À§ÇØ index°¡ 4 ÀÌÈÄÀÇ ¸ğµç °´Ã¼°¡ ÀÌµ¿ÇØ¾ßÇÔ)
-
-             ±×·¡¼­ cursorÀÇ °ªÀº 4¿¡¼­ 3ÀÌ µÇ¾î¾ß ÇÏ°í, lastRetÀÇ °ªÀº -1ÀÌ µÇ¾î¼­
-             ÀĞ¾î¿Â °´Ã¼°¡ ¾ø°Å³ª »èÁ¦ µÇ¾úÀ½À» ÀÇ¹ÌÇÑ´Ù.                     
-        */
 			if(lastRet == -1){
 				throw new IllegalStateException();
 			}
