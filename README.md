@@ -1,5 +1,5 @@
 # Exercise Java
-### 자바로 구현했던 내용
+### 자바로 구현한 내용
 * ConsoleEx1
   * CLI(Command Line Interface) 부분 구현
 * DealWithGrade
