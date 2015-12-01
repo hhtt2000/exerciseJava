@@ -10,6 +10,10 @@ import javax.swing.JTextField;
 
 public class ServerGui extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextArea textArea = new JTextArea(40, 25);
 	private JTextField textField = new JTextField(25);
 	private Server server;
@@ -35,7 +39,6 @@ public class ServerGui extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String msg = "[SERVER] "+textField.getText()+"\n";
-		server.sendMsg(msg);
 		textArea.append(msg);
 		textField.setText("");
 	}

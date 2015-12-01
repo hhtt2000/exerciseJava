@@ -11,6 +11,7 @@ public class Client {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private ClientGui clientGui;
+	private String name;
 	
 	public void setClientGui(ClientGui clientGui) {
 		this.clientGui = clientGui;
@@ -25,11 +26,13 @@ public class Client {
 		}
 	}
 	
-	public void useClient() {
+	public void useClient(String name) {
 		try {
+			this.name = name;
 			clientGui.appendMsg("서버에 연결됨.\n");
 			dis = new DataInputStream(socket.getInputStream());
 			dos = new DataOutputStream(socket.getOutputStream());
+			sendMsg(name);
 			clientGui.appendMsg("보낼 메세지 여기 작성\n");
 			while(dis != null) {
 				String msg = dis.readUTF();

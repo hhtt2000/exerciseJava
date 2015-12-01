@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -11,11 +12,16 @@ import javax.swing.JTextField;
 
 public class ClientGui extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextArea textArea = new JTextArea(40, 25);
 	private JTextField textField = new JTextField(25);
 	private Client client;
+	private String name;
 	
-	public ClientGui() {
+	public ClientGui(String name) {
 		add(textArea, BorderLayout.CENTER);
 		add(textField, BorderLayout.SOUTH);
 		textField.addActionListener(this);
@@ -25,19 +31,22 @@ public class ClientGui extends JFrame implements ActionListener {
 		setBounds(600, 100, 400, 600);
 		setTitle("chitchatForClient");
 		
+		this.name = name;
 		client = new Client(this);
-		client.useClient();
+		client.useClient(name);
 	}
 	
 	public static void main(String[] args) {
-		ClientGui gui = new ClientGui();
+		System.out.print("사용 할 이름을 입력해 주세요: ");
+		Scanner scanner = new Scanner(System.in);
+		String name = scanner.nextLine();
+		new ClientGui(name);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String msg = "[CLIENT] "+textField.getText()+"\n";
+		String msg = "["+name+"] "+textField.getText()+"\n";
 		client.sendMsg(msg);
-		textArea.append(msg);
 		textField.setText("");
 	}
 
