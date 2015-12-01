@@ -1,5 +1,9 @@
 # Exercise Java
 ### 자바로 구현한 내용
+* chat
+  * 간단한 다중 채팅 프로그램
+* java8
+  * 기본 람다식 사용 예제 
 * ConsoleEx1
   * CLI(Command Line Interface) 부분 구현
 * DealWithGrade
