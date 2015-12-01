@@ -60,4 +60,12 @@ public class Server {
 			}
 		}
 	}
+	
+	public void sendMsg(String msg) {
+		try {
+			dos.writeUTF(msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

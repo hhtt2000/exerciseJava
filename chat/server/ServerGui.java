@@ -34,7 +34,8 @@ public class ServerGui extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String msg = textField.getText()+"\n";
+		String msg = "[SERVER] "+textField.getText()+"\n";
+		server.sendMsg(msg);
 		textArea.append(msg);
 		textField.setText("");
 	}

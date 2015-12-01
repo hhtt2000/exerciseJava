@@ -35,7 +35,7 @@ public class ClientGui extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String msg = textField.getText()+"\n";
+		String msg = "[CLIENT] "+textField.getText()+"\n";
 		client.sendMsg(msg);
 		textArea.append(msg);
 		textField.setText("");
